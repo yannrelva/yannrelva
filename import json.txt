@@ -1,0 +1,144 @@
+import json
+
+def criar_notebook(nome_arquivo, blocos_codigo):
+    cells = []
+    for bloco in blocos_codigo:
+        cells.append({
+            'cell_type': 'code',
+            'execution_count': None,
+            'metadata': {},
+            'outputs': [],
+            'source': [linha + '\n' for linha in bloco]
+        })
+    nb = {
+        'cells': cells,
+        'metadata': {
+            'kernelspec': {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'},
+            'language_info': {'name': 'python'}
+        },
+        'nbformat': 4,
+        'nbformat_minor': 2
+    }
+    with open(nome_arquivo, 'w', encoding='utf-8') as f:
+        json.dump(nb, f, indent=2, ensure_ascii=False)
+    print(f"Arquivo criado com sucesso: {nome_arquivo}")
+
+# ---- AULA 01 ----
+aula_01 = [
+    [
+        '# 1. Pedindo os dados para o usuário',
+        'peso = float(input("Digite o seu peso (em kg): "))',
+        'altura = float(input("Digite a sua altura (em metros): "))',
+        '',
+        '# 2. Calculando o IMC',
+        'imc = peso / (altura ** 2)',
+        '',
+        '# 3. Exibindo o resultado formatado',
+        'print(f"Seu IMC é: {imc:.2f}")'
+    ]
+]
+
+# ---- AULAS 02 A 05 ----
+aulas_02_05 = [
+    [
+        '# Atividade 2: Conversor de Temperatura (Celsius para Fahrenheit)',
+        'celsius = float(input("Digite a temperatura em Celsius: "))',
+        'fahrenheit = (celsius * 9/5) + 32',
+        'print(f"{celsius}°C equivale a {fahrenheit}°F")'
+    ],
+    [
+        '# Atividade 3: Calculadora de Desconto',
+        'preco_original = float(input("Digite o preço do produto: R$ "))',
+        'desconto = float(input("Digite a porcentagem de desconto (ex: 10): "))',
+        'valor_desconto = preco_original * (desconto / 100)',
+        'preco_final = preco_original - valor_desconto',
+        'print(f"Valor do desconto: R$ {valor_desconto:.2f}")',
+        'print(f"Preço final com desconto: R$ {preco_final:.2f}")'
+    ],
+    [
+        '# Atividade 4: Conversor de Moedas (Real para Dólar)',
+        'reais = float(input("Digite o valor em R$: "))',
+        'cotacao = float(input("Digite a cotação atual do dólar: U$ "))',
+        'dolares = reais / cotacao',
+        'print(f"R$ {reais:.2f} equivale a U$ {dolares:.2f}")'
+    ],
+    [
+        '# Atividade 5: Verificador de Par ou Ímpar',
+        'numero = int(input("Digite um número inteiro: "))',
+        'if numero % 2 == 0:',
+        '    print(f"O número {numero} é PAR.")',
+        'else:',
+        '    print(f"O número {numero} é ÍMPAR.")'
+    ]
+]
+
+# ---- AULAS 06 E 07 ----
+aulas_06_07 = [
+    [
+        '# Aula 06 - Desafio 1: Somatória dos Pares',
+        'N = int(input("Digite o valor final N: "))',
+        'soma = 0',
+        'for i in range(1, N + 1):',
+        '    if i % 2 == 0:',
+        '        soma += i',
+        'print(f"A soma dos pares entre 1 e {N} é: {soma}")'
+    ],
+    [
+        '# Aula 06 - Desafio 2: Validação de Nota',
+        'while True:',
+        '    nota = float(input("Digite uma nota entre 0 e 10: "))',
+        '    if 0 <= nota <= 10:',
+        '        print("Nota válida cadastrada!")',
+        '        break',
+        '    print("Nota Inválida")'
+    ],
+    [
+        '# Aula 06 - Desafio 6: Maior de 5 Números',
+        'maior = float("-inf")',
+        'for i in range(5):',
+        '    num = float(input(f"Digite o {i+1}º número: "))',
+        '    if num > maior:',
+        '        maior = num',
+        'print(f"O maior número digitado foi: {maior}")'
+    ],
+    [
+        '# Aula 07 - Exercício 1: Operações com Listas',
+        'notas = [8.5, 7.0, 9.2, 5.5, 10.0]',
+        'print(f"Lista de notas: {notas}")',
+        'print(f"Maior nota: {max(notas)}")',
+        'print(f"Menor nota: {min(notas)}")',
+        'print(f"Média das notas: {sum(notas)/len(notas):.2f}")'
+    ]
+]
+
+# ---- AULAS 08 E 09 ----
+aulas_08_09 = [
+    [
+        '# Aula 08 - Exercício 1: Dicionário de Aluno',
+        'aluno = {"nome": "Yann", "curso": "Engenharia da Computação", "módulo": 1}',
+        'print(f"Dicionário completo: {aluno}")',
+        'print(f"Curso do aluno: {aluno[\'curso\']}")'
+    ],
+    [
+        '# Aula 09 - Desafio 3: Função de Soma',
+        'def soma_tres(a, b, c):',
+        '    return a + b + c',
+        'print(f"Resultado da soma: {soma_tres(10, 20, 30)}")'
+    ],
+    [
+        '# Aula 09 - Desafio 4: Verificador Positivo/Negativo',
+        'def verificar_sinal(num):',
+        '    if num > 0:',
+        '        return "P"',
+        '    return "N"',
+        'print(f"Número 5: {verificar_sinal(5)}")',
+        'print(f"Número -3: {verificar_sinal(-3)}")'
+    ]
+]
+
+# Executa as criações
+criar_notebook('Aula-01.ipynb', aula_01)
+criar_notebook('Atividades-02-a-05.ipynb', aulas_02_05)
+criar_notebook('Atividades-Aula-06-e-07.ipynb', aulas_06_07)
+criar_notebook('Atividades-Aula-08-e-09.ipynb', aulas_08_09)
+print("\n[SUCESSO] Todos os arquivos foram corrigidos verticalmente!")
